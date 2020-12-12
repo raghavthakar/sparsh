@@ -12,7 +12,7 @@ address_to_sparsh = rospy.get_param('address_to_sparsh')
 
 with open(address_to_sparsh + '/src/gui/scripts/data/sparsh_state.yaml', 'r') as yaml_file:
     yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
-    rospy.set_param('current_rate',(yaml_data[1]['current_rate']))
+    rospy.set_param('current_rate',(yaml_data[1]['rate']))
     rospy.set_param('current_mode',(yaml_data[0]['current_mode']))
     print(rospy.get_param('current_rate'))
 

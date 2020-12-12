@@ -4,13 +4,13 @@ import cv2 as cv
 import rospy
 import pytesseract
 import numpy as np
-import time 
+import time
 import yaml
 from std_msgs.msg import String
 
 class Text_Manipulation:
 
-    def __init__(self, address = "/home/pkvk/word-random-text.png"):
+    def __init__(self, address = "~/sparsh/picture.png"):
         self.kernel = np.ones((2,1), np.uint8)
         self.img = cv.imread(address)
         self.rate = rospy.get_param('current_rate')
@@ -22,10 +22,10 @@ class Text_Manipulation:
 
     def get_braille(self):
 
-        with open('/home/pkvk/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
+        with open('/home/raghav/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
             self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
-        
+
 
     def manip(self):
 

@@ -8,6 +8,7 @@
   <arg name="headless" default="false"/>
   <arg name="debug" default="false"/>
 
+  <node name="setup" pkg="gui" type="setup.sh"/>
   <!-- LOAD ROBOT -->
   <param name="robot_description" command="$(find xacro)/xacro --inorder $(find sparsh_computation)/urdf/sparsh.xacro"/>
 

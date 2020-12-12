@@ -10,9 +10,10 @@ from std_msgs.msg import String
 
 class Text_Manipulation:
 
-    def __init__(self, address = "/home/pkvk/sparsh/picture.png"):
+    def __init__(self, address = "/picture.png"):
+        self.address_to_sparsh = rospy.get_param('address_to_sparsh')
         self.kernel = np.ones((2,1), np.uint8)
-        self.img = cv.imread(address)
+        self.img = cv.imread(self.address_to_sparsh + address)
         self.rate = rospy.get_param('current_rate')
         self.r = rospy.Rate(self.rate)
         self.string = None
@@ -22,7 +23,7 @@ class Text_Manipulation:
 
     def get_braille(self):
 
-        with open('/home/pkvk/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
+        with open(self.address_to_sparsh + '/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
             self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
 

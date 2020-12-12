@@ -40,7 +40,7 @@ class Text_Manipulation:
         while True:
             print ("Waiting")
             time.sleep(1)
-
+            self.state = rospy.get_param('current_mode')
             if self.state == 'reading':
                 break
 
@@ -54,6 +54,7 @@ class Text_Manipulation:
                 print(self.rate)
                 self.r.sleep()
 
+
             except KeyError:
                 pass
 
@@ -64,3 +65,4 @@ if __name__ == '__main__':
     t.get_braille()
     t.manip()
     t.string_to_twodigits()
+

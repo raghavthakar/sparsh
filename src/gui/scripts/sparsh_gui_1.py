@@ -47,7 +47,7 @@ class Ui_Form(object):
         self.scroll_dial.setGeometry(QtCore.QRect(75, 50, 100, 100))
         self.scroll_dial.setCursor(QtGui.QCursor(QtCore.Qt.ClosedHandCursor))
         self.scroll_dial.setMinimum(0)
-        self.scroll_dial.setMaximum(10)
+        self.scroll_dial.setMaximum(9)
         self.scroll_dial.setSingleStep(1)
         self.scroll_dial.setProperty("value", 5)
         self.scroll_dial.setSliderPosition(0)

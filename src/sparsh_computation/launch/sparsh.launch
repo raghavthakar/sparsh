@@ -45,17 +45,15 @@
     <remap from="/joint_states" to="/sparsh/joint_states"/>
   </node>
 
-  <!-- RVIZ -->
-  <!-- <node name="rviz" pkg="rviz" type="rviz"/> -->
-
   <!-- SPAWN ROBOT -->
   <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-urdf
         -model sparsh
         -param robot_description"/>
 
+  <node name="interface" pkg="gui" type="interface.py"/>
   <node name="ocr" pkg="sparsh_computation" type="ocr.py" args="--timeout 1" />
-  <node name="control" pkg="sparsh_computation" type="column_control.py" />
+  <node name="control" pkg="sparsh_computation" type="column_control.py" output="screen"/>
 
 
 </launch>

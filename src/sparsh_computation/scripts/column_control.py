@@ -14,7 +14,7 @@ class Controller():
         rospy.init_node('node_sparsh_controller')
 
         # sample rate
-        self.sample_rate = 60  # in Hz
+        self.sample_rate = rospy.get_param('current_rate')  # in Hz
         self.string =""
         self.sleep_rate = 1.5
         self.num = None
@@ -52,7 +52,7 @@ class Controller():
     def ocr_callback(self, msg):
         self.num = int(msg.data)
         self.num_left, self.num_right = self.number_filter(num=self.num)
-    
+        rospy.loginfo(self.num)
     
     def number_filter(self, num):
         num_right = math.fmod(num, 10) 
@@ -163,10 +163,10 @@ class Controller():
 
     def Control(self):
         try:
-            time.sleep(.5)
+            time.sleep(.1)
             self.func_dict[self.num_left]()
             self.func_dict[self.num_right]()
-            time.sleep(.5)
+            #time.sleep(.5)
         except:
             pass
 

@@ -2,7 +2,7 @@ sparsh:
     #Publish all joint states
     joint_state_controller:
         type: joint_state_controller/JointStateController
-        publish_rate: 100
+        publish_rate: 10
 
     #Position controllers
     top_right_column_to_base_link_position_controller:

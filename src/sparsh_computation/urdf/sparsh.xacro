@@ -27,9 +27,9 @@
   <xacro:property name="spacing_x" value="0.1"/>
   <xacro:property name="spacing_y" value="0.05"/>
   <xacro:property name="upper_limit" value="0.1"/>
-  <xacro:property name="vel" value="0.1"/>
-    
- 
+  <xacro:property name="vel" value="30"/>
+
+
   <!-- COLOURS FOR MATERIAL -->
   <material name="white">
     <color rgba="1 1 1 1"/>

@@ -28,7 +28,7 @@ class Ui_Form(object):
         # recalling
 
         #DATA TO BE WRITTEN ONTO YAML FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 0.5}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 0.5}, {'scroll_position': 0}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -86,7 +86,7 @@ class Ui_Form(object):
 
     def rangeMap(self, dial_val):
         if dial_val>0:
-            return ((dial_val)*(2-0.25)/(100)+0.25)
+            return ((dial_val)*(5-0.25)/(100)+0.25)
         else:
             return 0.25
 
@@ -94,12 +94,16 @@ class Ui_Form(object):
     def speedDialMoved(self):
         #UPDATE STATE IN FILE
         #MAP FROM 0.25 TO 2 (ONE EVERY 4 SECS TO 2 TIMES EVERY SEC)
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}, {'scroll_position': self.scroll_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
     def scrollDialMoved(self):
         print("Scroll dial value = %i" % (self.scroll_dial.value()))
+        #UPDATE STATE IN FILE
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}, {'scroll_position': self.scroll_dial.value()}
+        with open('data/sparsh_state.yaml', 'w') as yaml_file:
+            documents = yaml.dump(self.yaml_data, yaml_file)
 
     #HANDLES START STOP BUTTON CLICK
     def startStopClicked(self):
@@ -116,7 +120,7 @@ class Ui_Form(object):
             self.notify("You're in "+ self.current_mode +". Please stop recording first.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}, {'scroll_position': self.scroll_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -130,7 +134,7 @@ class Ui_Form(object):
             self.notify("Cannot record. Please exit to default state.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}, {'scroll_position': self.scroll_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -144,7 +148,7 @@ class Ui_Form(object):
             self.notify("You're in "+ self.current_mode +". Please exit to default state.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.rangeMap(self.speed_dial.value())}, {'scroll_position': self.scroll_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 

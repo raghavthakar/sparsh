@@ -37,7 +37,7 @@ class Text_Manipulation:
 
     def string_to_twodigits(self):
 
-        while True:
+        while not rospy.is_shutdown():
             print ("Waiting")
             time.sleep(1)
             self.state = rospy.get_param('current_mode')
@@ -65,4 +65,3 @@ if __name__ == '__main__':
     t.get_braille()
     t.manip()
     t.string_to_twodigits()
-

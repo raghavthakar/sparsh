@@ -1,3 +1,4 @@
 !!python/tuple
-- {current_mode: reading}
-- {rate: 0.74}
+- current_mode: default
+- rate: 2.625
+- scroll_position: 2

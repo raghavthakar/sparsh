@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<robot name="sparsh" xmlns:xacro="http://ros.org/wiki/xacro"
+            xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+            xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+            xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface">
+
+  <!-- INCLUDING THE PLUGINS FILE -->
+  <xacro:include filename="$(find sparsh_computation)/urdf/sparsh_plugins.xacro"/>
+
+  <!-- DEFINING GENERIC PROPERTIES THAT ARE USED IN THE XACRO FILE -->
+
+  <!-- along x axis -->
+  <xacro:property name="base_length" value="0.4"/>
+  <!-- along y axis -->
+  <xacro:property name="base_width" value="0.6"/>
+  <!-- along z axis -->
+  <xacro:property name="base_height" value="0.1"/>
+  <!-- base mass -->
+  <xacro:property name="base_mass" value="30"/>
+
+  <!-- along z axis -->
+  <xacro:property name="column_height" value="0.05"/>
+  <xacro:property name="column_dia" value="0.03"/>
+  <xacro:property name="column_mass" value="0.5"/>
+
+  <!-- joint properties -->
+  <xacro:property name="spacing_x" value="0.1"/>
+  <xacro:property name="spacing_y" value="0.05"/>
+  <xacro:property name="upper_limit" value="0.1"/>
+  <xacro:property name="vel" value="0.1"/>
+    
+ 
+  <!-- COLOURS FOR MATERIAL -->
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba ="0 0 0 1"/>
+  </material>
+
+  <material name="green">
+    <color rgba="0 1 0 1"/>
+  </material>
+
+  <!-- MACROS FOR INERTIAL PROPERTIES -->
+  <xacro:macro name="base_inertial">
+    <inertial>
+      <mass value="${base_mass}" />
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <inertia ixx="${(1/12)*base_mass*((base_width*base_width)+(base_height*base_height))}"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="${(1/12)*base_mass*((base_height*base_height)+(base_length*base_length))}"
+        iyz="0.0"
+        izz="${(1/12)*base_mass*((base_width*base_width)+(base_length*base_length))}" />
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="column_inertial">
+    <inertial>
+      <mass value="${column_mass}"/>
+      <inertia ixx="${(1/12)*column_mass*(3*column_dia*column_dia/4 + column_height*column_height)}"
+        ixy="0"
+        ixz="0"
+        iyy="${(1/12)*column_mass*(3*column_dia*column_dia/4 + column_height*column_height)}"
+        iyz="0"
+        izz="${0.5*column_mass*column_dia*column_dia/4}"/>
+    </inertial>
+  </xacro:macro>
+
+
+  <!-- BASE LINK -->
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${base_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <box size="${base_length} ${base_width} ${base_height}"/>
+      </geometry>
+    </collision>
+    <xacro:base_inertial/>
+  </link>
+
+  <!-- TOP RIGHT COLUMN LINK-->
+  <link name="column_link_top_right">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+  <!-- TOP LEFT COLUMN LINK-->
+  <link name="column_link_top_left">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+  <!-- MIDDLE RIGHT COLUMN LINK-->
+  <link name="column_link_middle_right">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+  <!-- MIDDLE LEFT COLUMN LINK-->
+  <link name="column_link_middle_left">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+  <!-- BOTTOM RIGHT COLUMN LINK-->
+  <link name="column_link_bottom_right">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+  <!-- BOTTOM LEFT COLUMN LINK-->
+    <link name="column_link_bottom_left">
+    <visual>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0 0 ${column_height/2}" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="${column_dia/2}" length="${column_height}"/>
+      </geometry>
+    </collision>
+    <xacro:column_inertial/>
+  </link>
+
+
+  <!-- JOINTS -->
+  <joint name="top_right_column_to_base_link" type="prismatic">
+      <origin xyz="-${spacing_x} ${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_top_right"/>
+  </joint>
+
+    <joint name="top_left_column_to_base_link" type="prismatic">
+      <origin xyz="-${spacing_x} -${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_top_left"/>
+  </joint>
+
+    <joint name="middle_right_column_to_base_link" type="prismatic">
+      <origin xyz="0 ${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_middle_right"/>
+  </joint>
+
+    <joint name="middle_left_column_to_base_link" type="prismatic">
+      <origin xyz="0 -${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_middle_left"/>
+  </joint>
+
+    <joint name="bottom_right_column_to_base_link" type="prismatic">
+      <origin xyz="${spacing_x} ${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_bottom_right"/>
+  </joint>
+
+    <joint name="bottom_left_column_to_base_link" type="prismatic">
+      <origin xyz="${spacing_x} -${spacing_y} ${base_height}" rpy="0 0 0"/>
+      <limit upper="${upper_limit}" lower="0" effort="500" velocity="${vel}"/>
+      <axis xyz="0 0 1" rpy="0 0 0"/>
+      <parent link="base_link"/>
+      <child link="column_link_bottom_left"/>
+  </joint>
+
+  <!-- TRANSMISSION INTERFACE -->
+
+  <transmission name="top_right_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="top_right_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="top_right_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="top_left_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="top_left_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="top_left_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="middle_right_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="middle_right_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="middle_right_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="middle_left_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="middle_left_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="middle_left_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="bottom_right_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="bottom_right_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="bottom_right_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="bottom_left_column_to_base">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="bottom_left_column_to_base_link">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="bottom_left_column_to_base_actuator">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/sparsh</robotNamespace>
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+</robot>

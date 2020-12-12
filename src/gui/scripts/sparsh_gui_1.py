@@ -84,11 +84,6 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def rangeMap(self, dialVal):
-        slope = (2 - 0.25) / (100 - 0)
-        output = output_start + slope * (input - input_start)
-        return(dialVal)
-
     def rangeMap(self, dial_val):
         if dial_val>0:
             return ((dial_val)*(2-0.25)/(100)+0.25)

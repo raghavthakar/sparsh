@@ -19,7 +19,7 @@ class Read():
         self.address_txt = ""
         self.address_pdf = ""
         self.file_extension = ""
-        self.img_extensions = ["jpg", "png", "jpeg"]
+        self.img_extensions = ["jpg", "png", "jpeg", "pgm"]
         self.rate = rospy.get_param('current_rate')
         self.r = rospy.Rate(self.rate)
         self.string = ""

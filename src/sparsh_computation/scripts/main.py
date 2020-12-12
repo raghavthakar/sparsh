@@ -25,8 +25,8 @@ class Read():
         self.string = ""
         self.state = rospy.get_param('current_mode')
         self.braille_dict = None
-        self.pub = rospy.Publisher('two_digits', String, queue_size=100)
-
+        self.pub = rospy.Publisher('two_digits', String, queue_size=1000)
+        self.length = None
 
     def address_allocation(self):
         for pos, char in enumerate(self.address):
@@ -52,11 +52,14 @@ class Read():
             erode = cv.erode(self.img, self.kernel, iterations=1)
             dilate = cv.dilate(erode, self.kernel, iterations=1)
             self.string = (pytesseract.image_to_string(dilate)).lower()
+            self.string = self.string[0:100]
+            self.length = len(self.string)
 
     def txt_manip(self):
         if len(self.address_txt) != 0:
             with open(self.address_to_sparsh + self.address_txt) as myfile:
                 self.string="".join(line.rstrip() for line in myfile)
+                self.string = self.string.lower()
                 print(self.string)
 
     def pdf_manip(self):
@@ -82,24 +85,20 @@ class Read():
                 break
 
         for i in range(len(self.string) - 1):
-            try:
-                x = String()
-                x.data = str(self.braille_dict[self.string[i]]).zfill(2)
-                self.pub.publish(x)
-                self.rate = rospy.get_param('current_rate')
-                self.r = rospy.Rate(self.rate)
-                print(self.rate)
-                self.r.sleep()
+            x = String()
+            x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+            self.pub.publish(x)
+            self.rate = rospy.get_param('current_rate')
+            self.r = rospy.Rate(self.rate)
+            self.r.sleep()
 
-
-            except KeyError:
-                pass
         
 if __name__ == "__main__":
     rospy.init_node("reader")
-    obj = Read("/he/tty.jpeg")
+    obj = Read("/example.txt")
     obj.address_allocation()
+    obj.get_braille()
     obj.image_manip()
     obj.txt_manip()
     obj.pdf_manip()
-    
+    obj.string_to_twodigits() 

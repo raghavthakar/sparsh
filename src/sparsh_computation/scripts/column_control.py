@@ -163,7 +163,7 @@ class Controller():
 
     def Control(self):
         try:
-            time.sleep(.1)
+            #time.sleep(.1)
             self.func_dict[self.num_left]()
             self.func_dict[self.num_right]()
             #time.sleep(.5)

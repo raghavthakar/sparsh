@@ -9,7 +9,12 @@ import yaml
 from std_msgs.msg import String
 
 class Memory:
-    
+
+    def __init__(self):
+        self.reset_memory()
+        self.pub = rospy.Publisher('recall', String, queue_size=100)
+        self.sub = rospy.Subscriber('record', String, self.record_into_memory)
+
     def reset_memory(self):
         rospy.set_param('0','')
         rospy.set_param('1','')
@@ -32,9 +37,3 @@ class Memory:
             key = rospy.get_param('current_scroll_position')
             x.data = rospy.get_param(str(key))
             self.pub.publish(x)
-
-
-    def __init__(self):
-        self.reset_memory()
-        self.pub = rospy.Publisher('recall', String, queue_size=100)
-        self.sub = rospy.Subscriber('record', String, self.record_into_memory)

@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'sparsh_gui_1.ui'
@@ -29,10 +31,11 @@ class Ui_Form(object):
         # DATETIME OBJECT TO STORE CURRENT AND PREVIOUS TIME TO
         # ACCOUNT FOR REPETITION
         # USE THE .timestamp() METHOD TO PERFORM ARITHMETIC
+        self.previous_time=datetime.now()
+        self.current_time=datetime.now()
 
         #DATA TO BE WRITTEN ONTO YAML FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 50},
-        {'memory_slot' : 0}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 50}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -91,16 +94,12 @@ class Ui_Form(object):
     #CALLBACK DEFINITIONS
     def speedDialMoved(self):
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}, {'memory_slot' : self.scroll_dial.value()}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
     def scrollDialMoved(self):
         print("Scroll dial value = %i" % (self.scroll_dial.value()))
-        #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}, {'memory_slot' : self.scroll_dial.value()}
-        with open('data/sparsh_state.yaml', 'w') as yaml_file:
-            documents = yaml.dump(self.yaml_data, yaml_file)
 
     #HANDLES START STOP BUTTON CLICK
     def startStopClicked(self):
@@ -117,7 +116,7 @@ class Ui_Form(object):
             self.notify("You're in "+ self.current_mode +". Please stop recording forst.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}, {'memory_slot' : self.scroll_dial.value()}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -131,7 +130,7 @@ class Ui_Form(object):
             self.notify("Cannot record. Please exit to default state.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}, {'memory_slot' : self.scroll_dial.value()}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 
@@ -145,7 +144,7 @@ class Ui_Form(object):
             self.notify("You're in "+ self.current_mode +". Please exit to default state.")
         self.notify("Current mode is "+self.current_mode)
         #UPDATE STATE IN FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}, {'memory_slot' : self.scroll_dial.value()}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : self.speed_dial.value()}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 

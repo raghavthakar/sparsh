@@ -1,3 +1,3 @@
 !!python/tuple
-- {current_mode: reading}
-- {rate: 50}
+- current_mode: default
+- rate: 0.7575

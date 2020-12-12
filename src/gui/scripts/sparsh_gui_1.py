@@ -28,7 +28,7 @@ class Ui_Form(object):
         # recalling
 
         #DATA TO BE WRITTEN ONTO YAML FILE
-        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 50}
+        self.yaml_data = {'current_mode' : self.current_mode}, {'rate' : 0.5}
         with open('data/sparsh_state.yaml', 'w') as yaml_file:
             documents = yaml.dump(self.yaml_data, yaml_file)
 

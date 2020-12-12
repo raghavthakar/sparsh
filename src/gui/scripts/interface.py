@@ -7,7 +7,7 @@ import rospy
 current_mode="bruh"
 current_rate=23
 
-with open('/home/raghav/sparsh/src/gui/scripts/data/sparsh_state.yaml', 'r') as yaml_file:
+with open('/home/pkvk/sparsh/src/gui/scripts/data/sparsh_state.yaml', 'r') as yaml_file:
     yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
     rospy.set_param('current_rate',(yaml_data[1]['rate']))
     rospy.set_param('current_mode',(yaml_data[0]['current_mode']))
@@ -18,7 +18,7 @@ with open('/home/raghav/sparsh/src/gui/scripts/data/sparsh_state.yaml', 'r') as 
 while True:
     previous_mode=rospy.get_param('current_mode')
     previous_rate=rospy.get_param('current_rate')
-    with open('/home/raghav/sparsh/src/gui/scripts/data/sparsh_state.yaml', 'r') as yaml_file:
+    with open('/home/pkvk/sparsh/src/gui/scripts/data/sparsh_state.yaml', 'r') as yaml_file:
         time.sleep(0.1)
         yaml_data = yaml.load(yaml_file, Loader=yaml.FullLoader)
         try:

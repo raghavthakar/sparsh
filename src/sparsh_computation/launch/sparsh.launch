@@ -52,7 +52,7 @@
         -param robot_description"/>
 
   <node name="interface" pkg="gui" type="interface.py"/>
-  <node name="ocr" pkg="sparsh_computation" type="ocr.py" args="--timeout 1" />
+  <node name="ocr" pkg="sparsh_computation" type="ocr.py" output="screen" args="--timeout 1" />
   <node name="control" pkg="sparsh_computation" type="column_control.py" output="screen"/>
 
 

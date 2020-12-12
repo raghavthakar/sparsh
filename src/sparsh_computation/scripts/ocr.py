@@ -10,7 +10,7 @@ from std_msgs.msg import String
 
 class Text_Manipulation:
 
-    def __init__(self, address = "~/sparsh/picture.png"):
+    def __init__(self, address = "/home/pkvk/sparsh/picture.png"):
         self.kernel = np.ones((2,1), np.uint8)
         self.img = cv.imread(address)
         self.rate = rospy.get_param('current_rate')
@@ -22,7 +22,7 @@ class Text_Manipulation:
 
     def get_braille(self):
 
-        with open('/home/raghav/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
+        with open('/home/pkvk/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
             self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
 
@@ -36,16 +36,26 @@ class Text_Manipulation:
 
     def string_to_twodigits(self):
 
-        if self.state == 'reading':
-            for i in range(len(self.string) - 1):
-                try:
-                    x = String()
-                    x.data = str(self.braille_dict[self.string[i]]).zfill(2)
-                    self.pub.publish(x)
-                    self.r.sleep()
+        while True:
+            print ("Waiting")
+            time.sleep(1)
 
-                except:
-                    pass
+            if self.state == 'reading':
+                break
+
+        for i in range(len(self.string) - 1):
+            try:
+                x = String()
+                x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+                self.pub.publish(x)
+                self.rate = rospy.get_param('current_rate')
+                self.r = rospy.Rate(self.rate)
+                print(self.rate)
+                self.r.sleep()
+
+            except KeyError:
+                pass
+
 
 if __name__ == '__main__':
     rospy.init_node('ocr')

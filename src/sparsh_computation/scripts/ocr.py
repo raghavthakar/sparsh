@@ -5,17 +5,27 @@ import rospy
 import pytesseract
 import numpy as np
 import time 
+import yaml
+from std_msgs.msg import String
 
 class Text_Manipulation:
 
     def __init__(self, address = "/home/pkvk/word-random-text.png"):
         self.kernel = np.ones((2,1), np.uint8)
         self.img = cv.imread(address)
-        self.sleeptime = rospy.get_param('current_rate')
+        self.rate = rospy.get_param('current_rate')
+        self.r = rospy.Rate(self.rate)
         self.string = None
-        self.state = rospy.get_param('current_node')
-        self.braille = rospy.get_param('braille')                     
+        self.state = rospy.get_param('current_mode')
+        self.braille_dict = None
+        self.pub = rospy.Publisher('two_digits', String, queue_size=100)
 
+    def get_braille(self):
+
+        with open('/home/pkvk/sparsh/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
+            self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
+
+        
 
     def manip(self):
 
@@ -28,12 +38,18 @@ class Text_Manipulation:
 
         if self.state == 'reading':
             for i in range(len(self.string) - 1):
-                rospy.set_param('two_digits', int(str(self.braille[self.string[i]]) + str(self.braille[self.string[i+1]])))
-                time.sleep(int(self.sleeptime))
+                try:
+                    x = String()
+                    x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+                    self.pub.publish(x)
+
+                except:
+                    pass
 
 if __name__ == '__main__':
     rospy.init_node('ocr')
     t = Text_Manipulation()
+    t.get_braille()
     t.manip()
     t.string_to_twodigits()
-
+    t.r.sleep()

@@ -55,7 +55,6 @@
         -model sparsh
         -param robot_description"/>
 
-  <node name="interface" pkg="gui" type="interface.py" args="--timeout 1"/>
   <node name="ocr" pkg="sparsh_computation" type="ocr.py" args="--timeout 1" />
   <node name="control" pkg="sparsh_computation" type="column_control.py" args="--timeout 1"/>
 

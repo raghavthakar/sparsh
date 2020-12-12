@@ -28,7 +28,6 @@
 
   <!-- LOAD JOI CONFIGURATION -->
   <rosparam file="$(find sparsh_computation)/config/sparsh.yaml" command="load"/>
-  <rosparam file="$(find sparsh_computation)/config/braille.yaml" command="load"/>
 
   <!-- LOAD THE CONTROLLER -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
@@ -56,7 +55,7 @@
         -param robot_description"/>
 
   <node name="ocr" pkg="sparsh_computation" type="ocr.py" args="--timeout 1" />
-  <node name="control" pkg="sparsh_computation" type="column_control.py" args="--timeout 1"/>
+  <node name="control" pkg="sparsh_computation" type="column_control.py" />
 
 
 </launch>

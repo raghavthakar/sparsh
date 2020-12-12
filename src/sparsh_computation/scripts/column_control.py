@@ -176,6 +176,5 @@ if __name__ == '__main__':
     box = Controller()
     r = rospy.Rate(box.sample_rate)
     while not rospy.is_shutdown():
-        box.get_num()
         box.Control()
         r.sleep()

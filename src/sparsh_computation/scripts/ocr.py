@@ -42,6 +42,7 @@ class Text_Manipulation:
                     x = String()
                     x.data = str(self.braille_dict[self.string[i]]).zfill(2)
                     self.pub.publish(x)
+                    self.r.sleep()
 
                 except:
                     pass
@@ -52,4 +53,3 @@ if __name__ == '__main__':
     t.get_braille()
     t.manip()
     t.string_to_twodigits()
-    t.r.sleep()

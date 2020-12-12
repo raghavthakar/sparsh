@@ -46,10 +46,13 @@ class Controller():
         "6": self._6,
         "7": self._7
         }
+        rospy.Subscriber('/two_digits', String , callback=self.ocr_callback)
 
-    def get_num(self):
-        self.num = rospy.get_param('two_digits')
-        self.num_left, self.num_right = self.number_filter(self.num)
+    # Callbacks
+    def ocr_callback(self, msg):
+        self.num = int(msg.data)
+        self.num_left, self.num_right = self.number_filter(num=self.num)
+    
     
     def number_filter(self, num):
         num_right = math.fmod(num, 10) 

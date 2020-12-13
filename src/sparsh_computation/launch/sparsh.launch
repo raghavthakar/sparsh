@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <launch>
-  <arg name="world" default="empty"/> 
+  <arg name="world" default="empty"/>
   <arg name="paused" default="false"/>
   <arg name="use_sim_time" default="true"/>
   <arg name="gui" default="true"/>
@@ -33,12 +33,12 @@
   <!-- LOAD THE CONTROLLER -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="sparsh" args="
-    top_right_column_to_base_link_position_controller 
+    top_right_column_to_base_link_position_controller
     top_left_column_to_base_link_position_controller
-    middle_right_column_to_base_link_position_controller 
-    middle_left_column_to_base_link_position_controller 
+    middle_right_column_to_base_link_position_controller
+    middle_left_column_to_base_link_position_controller
     bottom_right_column_to_base_link_position_controller
-    bottom_left_column_to_base_link_position_controller 
+    bottom_left_column_to_base_link_position_controller
     joint_state_controller"/>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
@@ -53,7 +53,7 @@
         -param robot_description"/>
 
   <node name="interface" pkg="gui" type="interface.py"/>
-  <node name="main" pkg="sparsh_computation" type="main.py" output="screen" args="--timeout 1" />
+  <node name="main" pkg="sparsh_computation" type="ocr.py" output="screen" args="--timeout 1" />
   <node name="control" pkg="sparsh_computation" type="column_control.py" output="screen"/>
 
 

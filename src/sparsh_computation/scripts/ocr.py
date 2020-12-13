@@ -38,25 +38,25 @@ class Text_Manipulation:
     def string_to_twodigits(self):
 
         while not rospy.is_shutdown():
-            print ("Waiting")
+            print (self.state)
             time.sleep(1)
             self.state = rospy.get_param('current_mode')
             if self.state == 'reading':
-                break
+                for i in range(len(self.string) - 1):
+                    try:
+                        x = String()
+                        x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+                        self.pub.publish(x)
+                        self.rate = rospy.get_param('current_rate')
+                        self.r = rospy.Rate(self.rate)
+                        print(self.rate)
+                        self.r.sleep()
 
-        for i in range(len(self.string) - 1):
-            try:
-                x = String()
-                x.data = str(self.braille_dict[self.string[i]]).zfill(2)
-                self.pub.publish(x)
-                self.rate = rospy.get_param('current_rate')
-                self.r = rospy.Rate(self.rate)
-                print(self.rate)
-                self.r.sleep()
-
-
-            except KeyError:
-                pass
+                    except KeyError:
+                        pass
+                    self.state = rospy.get_param('current_mode')
+                    if self.state !='reading':
+                        break;
 
 
 if __name__ == '__main__':
@@ -64,4 +64,5 @@ if __name__ == '__main__':
     t = Text_Manipulation()
     t.get_braille()
     t.manip()
+    # t.send_string_for_voice()
     t.string_to_twodigits()

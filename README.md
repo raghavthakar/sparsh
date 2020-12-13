@@ -50,6 +50,8 @@ Open the text file and replace your laptop's id inside the setup.sh
 ![picture](readme_assets/setup.png)
 
 ```
+roscore
+
 source setup.sh
 ```
 

@@ -8,6 +8,8 @@ import time
 import yaml
 from std_msgs.msg import String
 import PyPDF2
+import memory
+
 
 # ADDING path
 class Read():
@@ -31,7 +33,6 @@ class Read():
     def stall(self):
         while self.state == 'default':
             self.state = rospy.get_param('current_mode')
-            print(self.state)
             time.sleep(1)
 
     def address_allocation(self):
@@ -66,7 +67,6 @@ class Read():
             with open(self.address_to_sparsh + self.address_txt) as myfile:
                 self.string="".join(line.rstrip() for line in myfile)
                 self.string = self.string.lower()
-                print(self.string)
 
     def pdf_manip(self):
         if len(self.address_pdf) != 0:
@@ -75,10 +75,8 @@ class Read():
             page_obj = pdf_reader.getPage(0)
             self.string = page_obj.extractText()
             self.string = self.string.replace('\n', ' ')
-            print(self.string)
 
     def set_string_for_voice(self):
-        print(self.string)
         string_file_for_voice = open(r""+self.address_to_sparsh + '/src/gui/scripts/data/string_for_voice.txt', 'w')
         string_file_for_voice.write(self.string.encode('utf-8'))
         string_file_for_voice.close() 
@@ -89,7 +87,6 @@ class Read():
 
     def string_to_twodigits(self):
         while not rospy.is_shutdown():
-            print (self.state)
             time.sleep(1)
             self.state = rospy.get_param('current_mode')
             if self.state == 'reading':
@@ -97,31 +94,37 @@ class Read():
                     try:
                         x = String()
                         x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+                        rospy.loginfo(x)
                         self.pub.publish(x)
                         self.rate = rospy.get_param('current_rate')
                         self.r = rospy.Rate(self.rate)
-                        print(self.rate)
                         self.r.sleep()
 
                     except KeyError:
                         pass
                     self.state = rospy.get_param('current_mode')
                     if self.state !='reading':
-                        break
+                        break;
         self.state='default'
         rospy.set_param('current_mode', self.state)
         self.stall()
 
-
 if __name__ == "__main__":
-    rospy.init_node("reader")
+    rospy.init_node("sparsh")
     while not rospy.is_shutdown():
-        obj = Read("/example.txt")
-        obj.stall()
-        obj.address_allocation()
-        obj.get_braille()
-        obj.image_manip()
-        obj.txt_manip()
-        obj.pdf_manip()
-        obj.set_string_for_voice()
-        obj.string_to_twodigits()
+        #mem_obj = memory.Memory()
+        if rospy.get_param('current_mode') == 'reading':
+            obj = Read("/example.txt")
+            obj.stall()
+            obj.address_allocation()
+            obj.get_braille()
+            obj.image_manip()
+            obj.txt_manip()
+            obj.pdf_manip()
+            obj.set_string_for_voice()
+            obj.string_to_twodigits()
+        elif rospy.get_param('current_mode') == 'recalling':
+            print("UnderConstruction")
+            time.sleep(0.2)
+            #mem_obj.recall()
+            #mem_obj.string_to_twodigits()        

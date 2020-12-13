@@ -37,3 +37,10 @@ class Memory:
             key = rospy.get_param('current_scroll_position')
             x.data = rospy.get_param(str(key))
             self.pub.publish(x)
+
+    def string_to_twodigits(self):
+        while not rospy.is_shutdown():
+            """
+            Under Construction
+           """ 
+            pass

@@ -1,3 +1,3 @@
 #!/bin/sh
 
-rosparam set address_to_sparsh '/home/blebot/sparsh'
+rosparam set address_to_sparsh '/home/pkvk/sparsh'

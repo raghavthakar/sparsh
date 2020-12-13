@@ -107,7 +107,7 @@ class Read():
                         pass
                     self.state = rospy.get_param('current_mode')
                     if self.state !='reading':
-                        break;
+                        break
         self.state='default'
         rospy.set_param('current_mode', self.state)
         self.stall()

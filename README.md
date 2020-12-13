@@ -1,4 +1,4 @@
-![picture](readme_assets/Asset 1.png)
+![picture](readme_assets/Asset 1.PNG)
 # Sparsh
 
 

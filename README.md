@@ -4,6 +4,7 @@
 ## HackOff 3.0 project. A braille reader for everything!
 
 
+The future is accessible, and this is how we get there.
 
 Welcome to our repository. Sparsh is a device that we made so that we 
 can help blind people read anytime and anywhere. The average device that blind people use cost above 1 lakh rupees but we've found a low cost efficient solution "Sparsh".

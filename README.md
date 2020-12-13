@@ -2,12 +2,12 @@
 # Sparsh
 
 
-## HackOff 3.0 project. A braille reader for everything!
+## A braille reader for everything!
 
-### Team Name: Team Suroor
-### Track: Robotics, Beginners
-### Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
 ### The future is accessible, and this is how we get there.
+### Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
+
+Watch the video: https://youtu.be/85EneFnb2sQ
 
 Sparsh is an open-source hardware solution that aims to make reading more accessible for the visually impaired. It does so by extracting text from any document using OCR (Optical Character Recognition). The text is then translated into Braille and/or Voice feedback, which is sequentially outputted through physical actuation. The rate of translation, and the exact moment at which translation is to be started or stopped can be controlled using a reliable hardware user-interface.
 

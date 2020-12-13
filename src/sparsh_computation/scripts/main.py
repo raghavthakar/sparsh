@@ -81,6 +81,7 @@ class Read():
         print(self.string)
         string_file_for_voice = open(r""+self.address_to_sparsh + '/src/gui/scripts/data/string_for_voice.txt', 'w')
         string_file_for_voice.write(self.string.encode('utf-8'))
+        string_file_for_voice.close() 
 
     def get_braille(self):
         with open(self.address_to_sparsh + '/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:

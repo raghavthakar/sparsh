@@ -37,6 +37,7 @@ class Text_Manipulation:
         print(self.string)
         string_file_for_voice = open(r""+self.address_to_sparsh + '/src/gui/scripts/data/string_for_voice.txt', 'w')
         string_file_for_voice.write(self.string.encode('utf-8'))
+        string_file_for_voice.close() 
 
     def string_to_twodigits(self):
 

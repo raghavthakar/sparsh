@@ -37,9 +37,25 @@ Setting up the directory:
 ```
 cd ~/sparsh/src/gui/scripts
 ```
-Open the text file and replace your laptop's id inside the setup.sh.
+Open the text file and replace your laptop's id inside the setup.sh
+
+
 ```
+source setup.sh
 ```
 
+To run the gui:
+```
+cd ~/sparsh/src/gui/scripts/ && python3 sparsh_gui_1.py
+```
+
+To run the simulation on Gazebo:
+```
+cd ~/sparsh
+
+catkin_make
+
+source devel/setup.bash
+```
 
 

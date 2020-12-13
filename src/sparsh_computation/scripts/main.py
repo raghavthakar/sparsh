@@ -28,6 +28,12 @@ class Read():
         self.pub = rospy.Publisher('two_digits', String, queue_size=1000)
         self.length = None
 
+    def stall(self):
+        while self.state == 'default':
+            self.state = rospy.get_param('current_mode')
+            print(self.state)
+            time.sleep(1)
+
     def address_allocation(self):
         for pos, char in enumerate(self.address):
             if char == '.':
@@ -38,13 +44,13 @@ class Read():
 
         elif self.file_extension == "txt":
             self.address_txt = self.address
-        
+
         elif self.file_extension == "pdf":
             self.address_pdf = self.address
-        
+
         else:
             print(" FILE EXTENSION {} is not supported.".format(self.file_extension))
-    
+
     def image_manip(self):
         if len(self.address_img) != 0:
             self.kernel = np.ones((2,1), np.uint8)
@@ -70,35 +76,51 @@ class Read():
             self.string = page_obj.extractText()
             self.string = self.string.replace('\n', ' ')
             print(self.string)
-            
+
+    def set_string_for_voice(self):
+        print(self.string)
+        string_file_for_voice = open(r""+self.address_to_sparsh + '/src/gui/scripts/data/string_for_voice.txt', 'w')
+        string_file_for_voice.write(self.string.encode('utf-8'))
 
     def get_braille(self):
         with open(self.address_to_sparsh + '/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
-            self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader) 
+            self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
     def string_to_twodigits(self):
         while not rospy.is_shutdown():
-            print ("Waiting")
+            print (self.state)
             time.sleep(1)
             self.state = rospy.get_param('current_mode')
             if self.state == 'reading':
-                break
+                for i in range(len(self.string) - 1):
+                    try:
+                        x = String()
+                        x.data = str(self.braille_dict[self.string[i]]).zfill(2)
+                        self.pub.publish(x)
+                        self.rate = rospy.get_param('current_rate')
+                        self.r = rospy.Rate(self.rate)
+                        print(self.rate)
+                        self.r.sleep()
 
-        for i in range(len(self.string) - 1):
-            x = String()
-            x.data = str(self.braille_dict[self.string[i]]).zfill(2)
-            self.pub.publish(x)
-            self.rate = rospy.get_param('current_rate')
-            self.r = rospy.Rate(self.rate)
-            self.r.sleep()
+                    except KeyError:
+                        pass
+                    self.state = rospy.get_param('current_mode')
+                    if self.state !='reading':
+                        break;
+        self.state='default'
+        rospy.set_param('current_mode', self.state)
+        self.stall()
 
-        
+
 if __name__ == "__main__":
     rospy.init_node("reader")
-    obj = Read("/example.txt")
-    obj.address_allocation()
-    obj.get_braille()
-    obj.image_manip()
-    obj.txt_manip()
-    obj.pdf_manip()
-    obj.string_to_twodigits() 
+    while not rospy.is_shutdown():
+        obj = Read("/example.txt")
+        obj.stall()
+        obj.address_allocation()
+        obj.get_braille()
+        obj.image_manip()
+        obj.txt_manip()
+        obj.pdf_manip()
+        obj.set_string_for_voice()
+        obj.string_to_twodigits()

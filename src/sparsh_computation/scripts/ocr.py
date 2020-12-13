@@ -26,14 +26,17 @@ class Text_Manipulation:
         with open(self.address_to_sparsh + '/src/sparsh_computation/config/braille_dict.yaml', 'r') as yaml_file:
             self.braille_dict = yaml.load(yaml_file, Loader=yaml.FullLoader)
 
-
-
     def manip(self):
 
         erode = cv.erode(self.img, self.kernel, iterations=1)
         dilate = cv.dilate(erode, self.kernel, iterations=1)
 
         self.string = (pytesseract.image_to_string(dilate)).lower()
+
+    def set_string_for_voice(self):
+        print(self.string)
+        string_file_for_voice = open(r""+self.address_to_sparsh + '/src/gui/scripts/data/string_for_voice.txt', 'w')
+        string_file_for_voice.write(self.string.encode('utf-8'))
 
     def string_to_twodigits(self):
 
@@ -64,5 +67,5 @@ if __name__ == '__main__':
     t = Text_Manipulation()
     t.get_braille()
     t.manip()
-    # t.send_string_for_voice()
+    t.set_string_for_voice()
     t.string_to_twodigits()

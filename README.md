@@ -1,4 +1,4 @@
-![picture](readme_assets/setup.png)
+![picture](readme_assets/Asset 1.png)
 # Sparsh
 
 
@@ -14,6 +14,10 @@ can help blind people read anytime and anywhere. The average device that blind p
 
 
 Sparsh has a camera at it's bottom which will read any document kept under it. Once the document text is read, the user could keep his/her hand on the 6 cylinder actuators to feel the output. To make the reading more comprehensive we have added a speaker to the node and a headphone jack to the device so the user can listen to what they're reading while feeling the braille output.
+
+![picture](readme_assets/sparsh_v13_camera.PNG)
+![picture](readme_assets/sparsh_v13_closeup.PNG)
+![picture](readme_assets/sparsh_v13_front_top.PNG)
 
 Dependecy list to run the simulation and the gui:
 

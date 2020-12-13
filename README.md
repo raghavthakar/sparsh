@@ -1,4 +1,4 @@
-![picture](readme_assets/Asset 1.PNG)
+![picture](readme_assets/Asset_1.)
 # Sparsh
 
 
@@ -18,6 +18,7 @@ Sparsh has a camera at it's bottom which will read any document kept under it. O
 ![picture](readme_assets/sparsh_v13_camera.PNG)
 ![picture](readme_assets/sparsh_v13_closeup.PNG)
 ![picture](readme_assets/sparsh_v13_front_top.PNG)
+![picture](readme_assets/gif_1.gif)
 
 Dependecy list to run the simulation and the gui:
 

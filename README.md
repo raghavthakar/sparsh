@@ -46,7 +46,7 @@ Setting up the directory:
 cd ~/sparsh/src/gui/scripts
 ```
 Open the text file and replace your laptop's id inside the setup.sh
-
+![picture](readme_assets/setup.png)
 
 ```
 source setup.sh

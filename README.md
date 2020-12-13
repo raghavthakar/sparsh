@@ -1,3 +1,4 @@
+![picture](readme_assets/setup.png)
 # Sparsh
 
 

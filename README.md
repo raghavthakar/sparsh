@@ -56,6 +56,8 @@ cd ~/sparsh
 catkin_make
 
 source devel/setup.bash
+
+roslaunch sparsh_computation sparsh.launch
 ```
 
 

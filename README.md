@@ -1,6 +1,6 @@
 # Sparsh
 
-![hello](Asset_1.png)
+
 ## HackOff 3.0 project. A braille reader for everything!
 
 
@@ -29,7 +29,9 @@ Dependecy list to run the simulation and the gui:
 * Numpy(pip)
 * pytesseract(pip)
 
-Setting up the directory.
+Setting up the directory:
+
+
 
 ```
 cd ~/sparsh/src/gui/scripts

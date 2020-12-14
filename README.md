@@ -9,6 +9,8 @@
 
 Watch the video: https://youtu.be/85EneFnb2sQ
 
+View the 3D model: https://a360.co/3oQYW1j
+
 Sparsh is an open-source hardware solution that aims to make reading more accessible for the visually impaired. It does so by extracting text from any document using OCR (Optical Character Recognition). The text is then translated into Braille and/or Voice feedback, which is sequentially outputted through physical actuation. The rate of translation, and the exact moment at which translation is to be started or stopped can be controlled using a reliable hardware user-interface.
 
 Sparsh is a low-cost solution to other market alternatives that can cost well into lakhs of rupees. 6 cylindrical actuators actuate sequentially to give a tactile feedback of text, along with a speaker and headphone jack for Voice feedback.

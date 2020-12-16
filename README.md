@@ -2,18 +2,26 @@
 # Sparsh
 
 
-## HackOff 3.0 project. A braille reader for everything!
+## A braille reader for everything!
 
-### Team Name: Team Suroor
-### Track: Robotics, Beginners
-### Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
 ### The future is accessible, and this is how we get there.
+### Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
 
-Welcome to our repository. Sparsh is a device that we made so that we 
-can help blind people read anytime and anywhere. The average device that blind people use cost above 1 lakh rupees but we've found a low cost efficient solution "Sparsh".
+Watch the video: https://youtu.be/85EneFnb2sQ
 
+View the 3D model: https://a360.co/3oQYW1j
 
-Sparsh has a camera at it's bottom which will read any document kept under it. Once the document text is read, the user could keep his/her hand on the 6 cylinder actuators to feel the output. To make the reading more comprehensive we have added a speaker to the node and a headphone jack to the device so the user can listen to what they're reading while feeling the braille output.
+Sparsh is an open-source hardware solution that aims to make reading more accessible for the visually impaired. It does so by extracting text from any document using OCR (Optical Character Recognition). The text is then translated into Braille and/or Voice feedback, which is sequentially outputted through physical actuation. The rate of translation, and the exact moment at which translation is to be started or stopped can be controlled using a reliable hardware user-interface.
+
+Sparsh is a low-cost solution to other market alternatives that can cost well into lakhs of rupees. 6 cylindrical actuators actuate sequentially to give a tactile feedback of text, along with a speaker and headphone jack for Voice feedback.
+
+For the purpose of a viable demo of the hack at HackOff 3.0, this repository contains a GUI replica of the device’s hardware interface. Physical actuations have been simulated using Gazebo. Robot Operating System (ROS) was used to interface the hardware replica with software.
+
+Sparsh comes with the following functionalities:
+-    Reading physical documents and translating to Braille/Voice
+-    Recording and storing text locally in memory
+-    Recalling text from memory
+-    Translating text from PDFs, TXT files, and even Images!
 
 ![picture](readme_assets/sparsh_v13_camera.PNG)
 ![picture](readme_assets/sparsh_v13_closeup.PNG)

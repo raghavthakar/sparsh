@@ -16,7 +16,6 @@ int main(int argc, char const *argv[])
     if( img.empty() )
     {
         cout << "Could not open or find the image!\n" << endl;
-        cout << "Usage: " << argv[0] << " <Input image>" << endl;
         return -1;
     }
 

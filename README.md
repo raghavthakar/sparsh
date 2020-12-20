@@ -79,7 +79,7 @@ source devel/setup.bash
 roslaunch sparsh_computation sparsh.launch
 ```
 
-Chart for reference for Braille:
+Chart for reference of characters in Braille:
 
 ![picture](readme_assets/braille-chart.png)
 

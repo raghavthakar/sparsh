@@ -1,7 +1,0 @@
-PyQt5 (pip3)
-pyttsx3 (pip3)
-espeak (sudo apt install espeak)
-rospy
-pyyaml(pip3)
-datetime(pip3)
-PyPDF2(pip)

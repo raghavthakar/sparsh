@@ -166,7 +166,9 @@ class OCR : public rclcpp::Node
 		} 
 	}
 
-	void
+	void OCR::pdf_manipulation(){
+		
+	}
 int main(int argc, char * argv[])
   {
     	rclcpp::init(argc, argv);

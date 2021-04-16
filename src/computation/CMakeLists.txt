@@ -17,8 +17,13 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
+add_executable(computation_main src/main.cpp)
+ament_target_dependencies(computation_main rclcpp OpenCV)
 # find_package(<dependency> REQUIRED)
 
 if(BUILD_TESTING)

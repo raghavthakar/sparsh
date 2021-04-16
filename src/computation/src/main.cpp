@@ -8,8 +8,8 @@
 #include "opencv2/imgproc.hpp"
 #include "opencv2/highgui.hpp"
 
-using namespace std;
-using namespace cv;
+// using namespace std;
+// using namespace cv;
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
 
@@ -23,52 +23,33 @@ class OCR : public rclcpp::Node
 	
 	// ADDRESS ALLOCATION
 	std::string address;
-	
 	std::string address_img;
-	
 	std::string address_txt;
-	
 	std::string address_pdf;
-	
 	std::string file_extension;
-	
 	std::vector<std::string> address_extension;
 	
 	//OPENCV
 	cv::Mat img, erosion_dst, dilation_dst;
 
-	int erosion_elem = 3;
-	
-	int erosion_size = 10;
-	
-	int dilation_elem = 3;
-	
-	int dilation_size = 10;
-
+	size_t erosion_elem = 3;
+	size_t erosion_size = 10;
+	size_t dilation_elem = 3;
+	size_t dilation_size = 10;
+	size_t count_;
 	// TXT MANIP
-	string str_from_txt_;
-
+	std::string str_from_txt_;
   public:
 	
 	OCR();
 	
 	
 	void address_allocation();
-	
-	
 	void image_manipulation();
-	
-	
 	void txt_manipulation();
-	
-	
 	void pdf_manipulation();
-	
-	
-	void erosion();
-	
-	
-	void dilation();
+	void Erosion();
+	void Dilation();
 };
 
 	OCR::OCR(): Node("Sparsh_OCR"), count_(0)
@@ -86,19 +67,19 @@ class OCR : public rclcpp::Node
 
 			if (file_extension.compare(address_extension[0]) == 0){
 				
-				address_img = file_extension
+				address_img = file_extension;
 			
 			} 
 			
 			else if (file_extension.compare(address_extension[1]) == 0){
 			
-				address_txt = file_extension
+				address_txt = file_extension;
 			
 			}   
 			
 			else if (file_extension.compare(address_extension[2]) == 0){
 			
-				address_pdf = file_extension
+				address_pdf = file_extension;
 			
 			}   
 
@@ -114,7 +95,7 @@ class OCR : public rclcpp::Node
 	{
 		int erosion_type = cv::MORPH_RECT;
 
-		cv::Mat element = getStructuringElement( erosion_type, Size( 2*erosion_size + 1, 2*erosion_size+1 ), Point( erosion_size, erosion_size ) );
+		cv::Mat element = cv::getStructuringElement( erosion_type, cv::Size( 2*erosion_size + 1, 2*erosion_size+1 ), cv::Point( erosion_size, erosion_size ) );
 	
 		erode( img, erosion_dst, element );
 
@@ -124,7 +105,7 @@ class OCR : public rclcpp::Node
 	{
 		int dilation_type = cv::MORPH_RECT;
 
-		Mat element = getStructuringElement( dilation_type, Size( 2*dilation_size + 1, 2*dilation_size+1 ), Point( dilation_size, dilation_size ) );
+		cv::Mat element = cv::getStructuringElement( dilation_type, cv::Size( 2*dilation_size + 1, 2*dilation_size+1 ), cv::Point( dilation_size, dilation_size ) );
 	
 		dilate(img, dilation_dst, element );
 	}
@@ -143,15 +124,15 @@ class OCR : public rclcpp::Node
 
 	void OCR::txt_manipulation(){
 	
-		if( address_txt.length != 0){
+		if( address_txt.length() != 0){
 	
-			ifstream file("a.txt");
+			std::ifstream file("a.txt");
 	
 			if(file){
 	
 				while(getline(file, str_from_txt_, '.')){
 	
-					cout<<str_from_txt_<<"\n";
+					std::cout<<str_from_txt_<<"\n";
 	
 				}
 	
@@ -159,7 +140,7 @@ class OCR : public rclcpp::Node
 
 			else{
 
-				cout<<"FILE NOT FOUND\n";
+				std::cout<<"FILE NOT FOUND\n";
 
 			}
 			

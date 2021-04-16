@@ -5,3 +5,6 @@
 !README.md
 !src
 !src/**
+src/computation/src/.vscode/settings.json
+src/computation/src/test
+src/computation/src/test.cpp

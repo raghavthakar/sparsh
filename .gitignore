@@ -8,3 +8,4 @@
 src/computation/src/.vscode/settings.json
 src/computation/src/test
 src/computation/src/test.cpp
+src/computation/include/computation/example.h

@@ -3,7 +3,9 @@
 
 #include <string>
 #include <map>
-
+#include <string>
+#include <vector>
+#include <math.h>
 // Declaring a Function Pointer
 // Verbose: return_type (foo*)(signature) 
 typedef void (*function)(void);
@@ -11,6 +13,10 @@ typedef void (*function)(void);
 // Declaring a hash map for the incoming string values and initializing
 // the function through the key element
 typedef std::map<std::string, function> function_map_;
+
+// Declaring a string of vector to return values to left_num_ and 
+// right_num_ from number_filter function in class Controller
+typedef std::vector<std::string> vect_string;
 
 namespace ActuatePiston
 {
@@ -24,15 +30,16 @@ namespace ActuatePiston
         */
         private: std::string left_num_;
         private: std::string right_num_;
-
+        
         // Declaring a variable for the typedef function_map_
         private: function_map_ function_map_var_;
         
+        private: vect_string vect_string_val_;
         // Declaration of Constructor
         public: Controller();
 
         // Defining of functions for low level control
-        public: void number_filter(int_fast16_t); //Trivia: int_fast16_t is faster than int
+        public: vect_string& number_filter(int_fast16_t); //Trivia: int_fast16_t is faster than int
         public: void all_up();
         public: void reset();
         public: void reset_left();
@@ -62,7 +69,29 @@ namespace ActuatePiston
     Controller::Controller(){
         // Add the key and elements here.
         // Trivia: Emplace is a faster version of insert
-        function_map_var_.emplace();
+        function_map_var_.emplace("10", &_10);
+        function_map_var_.emplace("20", &_20);
+        function_map_var_.emplace("30", &_30);
+        function_map_var_.emplace("40", &_40);
+        function_map_var_.emplace("50", &_50);
+        function_map_var_.emplace("60", &_60);
+        function_map_var_.emplace("70", &_70);
+        function_map_var_.emplace("1", &_1);
+        function_map_var_.emplace("2", &_2);
+        function_map_var_.emplace("3", &_3);
+        function_map_var_.emplace("4", &_4);
+        function_map_var_.emplace("5", &_5);
+        function_map_var_.emplace("6", &_6);
+        function_map_var_.emplace("7", &_7);
+
+    }
+
+    vect_string& Controller::number_filter(int_fast16_t incoming_num)
+    {
+        int_fast16_t right = fmod(incoming_num, 10);
+        incoming_num = fmod(incoming_num, 10);
+        int_fast16_t left = floor(incoming_num);
+        
     }
 } // namespace ActuatePiston
 

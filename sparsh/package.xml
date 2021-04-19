@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>sparsh</name>
+  <version>2.0.0</version>
+  <description>
+    SPARSH, The blind box ("EDIT this lmao")
+  </description>
+
+  <maintainer email="sparsh@lmao.com">sparsh</maintainer>
+
+  <license>BSD</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>sparsh_braille</exec_depend>
+  <exec_depend>sparsh_control</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+
+</package>

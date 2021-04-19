@@ -28,8 +28,8 @@ namespace ActuatePiston
             left_num_ = 6
             right_num_ = 7
         */
-        private: std::string left_num_;
-        private: std::string right_num_;
+        private: int_fast16_t left_num_;
+        private: int_fast16_t right_num_;
         
         // Declaring a variable for the typedef function_map_
         private: function_map_ function_map_var_;

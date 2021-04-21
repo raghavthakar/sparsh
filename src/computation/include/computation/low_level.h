@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+
 // Declaring a Function Pointer
 // Verbose: return_type (foo*)(signature) 
 typedef void (*function)(void);

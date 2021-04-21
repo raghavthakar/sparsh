@@ -26,6 +26,9 @@ add_executable(main src/main.cpp)
 ament_target_dependencies(main rclcpp OpenCV)
 # find_package(<dependency> REQUIRED)
 
+
+add_executable(image_manip src/image_manip.cpp)
+ament_target_dependencies(image_manip rclcpp OpenCV)
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   # the following line skips the linter which checks for copyrights

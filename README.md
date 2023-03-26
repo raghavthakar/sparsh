@@ -5,9 +5,9 @@
 ## A braille reader for everything!
 
 ### The future is accessible, and this is how we get there.
-### Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
+Members: Keshav Kapur, Kvk Praneeth, and Raghav Thakar
 
-Watch the video: https://youtu.be/85EneFnb2sQ
+## Watch the video: https://youtu.be/85EneFnb2sQ
 
 View the 3D model: https://a360.co/3oQYW1j
 
